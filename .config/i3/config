@@ -1,26 +1,7 @@
-# i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-#
-# This config file uses keycodes (bindsym) and was written for the QWERTY
-# layout.
-#
-# To get a config file with the same key positions, but for your current
-# layout, use the i3-config-wizard
-#
-
 set $mod Mod4
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
+# Font for window titles
 font pango:Droid Sans Mono 16
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
@@ -37,9 +18,11 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
+# use xbacklight to adjust backlight
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight + 10
 bindsym XF86MonBrightnessDown exec --no-startup-id ~/.myscripts/darken.sh
 
+# use playerctl to control the player
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous 
 bindsym XF68AudioPlay exec --no-startup-id playerctl -p $(spot-spotify.sh) play-pause
@@ -67,6 +50,7 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+# i3-resurrect key bindings for saving...
 bindsym $mod+Ctrl+Shift+1 exec i3-resurrect save -w 1
 bindsym $mod+Ctrl+Shift+2 exec i3-resurrect save -w 2
 bindsym $mod+Ctrl+Shift+3 exec i3-resurrect save -w 3
@@ -78,6 +62,7 @@ bindsym $mod+Ctrl+Shift+8 exec i3-resurrect save -w 8
 bindsym $mod+Ctrl+Shift+9 exec i3-resurrect save -w 9
 bindsym $mod+Ctrl+Shift+0 exec i3-resurrect save -w 0
 
+# ...and for restoring
 bindsym $mod+Ctrl+1 exec i3-resurrect restore -w 1
 bindsym $mod+Ctrl+2 exec i3-resurrect restore -w 2
 bindsym $mod+Ctrl+3 exec i3-resurrect restore -w 3
@@ -149,8 +134,8 @@ bindsym $mod+minus scratchpad show
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1 home"
-set $ws2 "2 social"
-set $ws3 "3 settings"
+set $ws2 "2"
+set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
@@ -194,10 +179,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
+        # Pressing left will shrink the window's width.
+        # Pressing right will grow the window's width.
+        # Pressing up will shrink the window's height.
+        # Pressing down will grow the window's height.
         bindsym $left       resize shrink width 10 px or 10 ppt
         bindsym $down       resize grow height 10 px or 10 ppt
         bindsym $up         resize shrink height 10 px or 10 ppt
@@ -217,13 +202,17 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 #bar {
 #        status_command i3status
 #	separator_symbol " | "
 #	font pango:Droid Sans Mono 15
 #}
+
+# Custom bar
+#exec ~/.config/i3lemonbar/i3_lemonbar.sh
+#exec --no-startup-id yabar
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # i3-gaps
 for_window [class=".*"] border pixel 5
@@ -242,14 +231,10 @@ bindsym $mod+Ctrl+$right resize grow width $resize_step px
 # Disable focus following mouse
 focus_follows_mouse no
 
-# Custom bar
-#exec ~/.config/i3lemonbar/i3_lemonbar.sh
-#exec --no-startup-id yabar
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-
 #exec_always xbindkeys --poll-rc
 exec_always killall -q picom; picom &
 
+# colors
 client.focused_inactive #0d1010 #212121 #d9d9d9 #0d1010 #836b31
 client.unfocused        #0d1010 #212121 #d9d9d9 #424242 #57472b
 client.focused          #702751 #cecece #000000 #d9d9d9 #ad8a34                                                      

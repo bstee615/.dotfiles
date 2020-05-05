@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-  echo "Usage: sync-dotfiles.sh [-v|--verbose]"
+  echo "Usage: sync-dotfiles.sh [-v|--verbose] [-c|--commit] [-h|--help]"
 }
 
 verbose=false
@@ -18,11 +18,6 @@ do
       ;;
     --commit | -c)
       commit=true
-      if [ $# -gt 1 ]
-      then
-        commitmsg=$2
-        shift
-      fi
       ;;
   esac
   shift
@@ -38,10 +33,5 @@ fi
 
 if $commit
 then
-  if [ -z "$commitmsg" ]
-  then
-    ~/.myscripts/dotfiles commit
-  else
-    ~/.myscripts/dotfiles commit -m "$commitmsg"
-  fi
+  ~/.myscripts/dotfiles commit
 fi

@@ -1,4 +1,4 @@
 # Directory to sync
 sync_dir = "~/onedrive"
 # Skip this pattern
-skip_file = ".*|~*"
+#skip_file = ".*|~*"

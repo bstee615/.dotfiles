@@ -13,8 +13,9 @@ nnoremap // :nohlsearch<CR>
 
 "indents
 set columns=80
-autocmd VimResized * if (&columns > 80) | set columns=80 | endif
+"autocmd VimResized * if (&columns > 80) | set columns=80 | endif
 set wrap
+set showbreak=+++
 set linebreak
 set breakindent
 set softtabstop=4
@@ -53,6 +54,9 @@ inoremap jk <esc>
 "nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>s :mksession<CR>
 "nnoremap <leader>a :Ag
+nnoremap <leader>p "+p 
+nnoremap <leader>c "+c
+nnoremap <leader>y "+y
 
 """"""""""""""""
 "vim-plug

@@ -13,9 +13,13 @@ alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
 # Trashcan
-alias rm='trash'
 alias rmrm='/bin/rm'
+alias rm='trash'
+
 
 # Import custom scripts and functions
 [[ -f ~/.myscripts/bash_doodlies.sh ]] && . ~/.myscripts/bash_doodlies.sh
+
+# Switch to fish
+exec fish
 

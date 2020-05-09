@@ -14,6 +14,8 @@ set __fish_git_prompt_showdirtystate 1
 
 #set PATH $PATH $HOME/dotnet/tools $HOME/.myscripts
 
+alias rmrm="/bin/rm"
+alias rm="/bin/trash"
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/.git/ --work-tree=$HOME"
 
 function dockersh

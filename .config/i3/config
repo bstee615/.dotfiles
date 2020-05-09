@@ -35,32 +35,8 @@ bindsym $mod+d exec --no-startup-id rofi -show run -theme dracula
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+g exec termite --role "quickGoogle" --exec "googler -n5" 
+bindsym $mod+g exec termite --role "quickGoogle" --exec "googler -j"
 for_window [window_role="^quickGoogle$"] floating enable
-
-# i3-resurrect key bindings for saving...
-#bindsym $mod+Ctrl+Shift+1 exec i3-resurrect save -w 1
-#bindsym $mod+Ctrl+Shift+2 exec i3-resurrect save -w 2
-#bindsym $mod+Ctrl+Shift+3 exec i3-resurrect save -w 3
-#bindsym $mod+Ctrl+Shift+4 exec i3-resurrect save -w 4
-#bindsym $mod+Ctrl+Shift+5 exec i3-resurrect save -w 5
-#bindsym $mod+Ctrl+Shift+6 exec i3-resurrect save -w 6
-#bindsym $mod+Ctrl+Shift+7 exec i3-resurrect save -w 7
-#bindsym $mod+Ctrl+Shift+8 exec i3-resurrect save -w 8
-#bindsym $mod+Ctrl+Shift+9 exec i3-resurrect save -w 9
-#bindsym $mod+Ctrl+Shift+0 exec i3-resurrect save -w 0
-
-# ...and for restoring
-#bindsym $mod+Ctrl+1 exec i3-resurrect restore -w 1
-#bindsym $mod+Ctrl+2 exec i3-resurrect restore -w 2
-#bindsym $mod+Ctrl+3 exec i3-resurrect restore -w 3
-#bindsym $mod+Ctrl+4 exec i3-resurrect restore -w 4
-#bindsym $mod+Ctrl+5 exec i3-resurrect restore -w 5
-#bindsym $mod+Ctrl+6 exec i3-resurrect restore -w 6
-#bindsym $mod+Ctrl+7 exec i3-resurrect restore -w 7
-#bindsym $mod+Ctrl+8 exec i3-resurrect restore -w 8
-#bindsym $mod+Ctrl+9 exec i3-resurrect restore -w 9
-#bindsym $mod+Ctrl+0 exec i3-resurrect restore -w 0
 
 # change focus
 bindsym $mod+$left focus left
@@ -110,7 +86,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -166,33 +142,6 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window's width.
-        # Pressing right will grow the window's width.
-        # Pressing up will shrink the window's height.
-        # Pressing down will grow the window's height.
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-
-bindsym $mod+r mode "resize"
-
 # resize with keyboard
 set $resize_step 30
 bindsym $mod+Ctrl+plus resize grow width $resize_step px
@@ -200,44 +149,23 @@ bindsym $mod+Ctrl+minus resize shrink width $resize_step px
 bindsym $mod+Ctrl+Shift+plus resize grow height $resize_step px
 bindsym $mod+Ctrl+Shift+minus resize shrink height $resize_step px
 
-# Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
-#bar {
-#        status_command i3status
-#	separator_symbol " | "
-#	font pango:Droid Sans Mono 15
-#}
-
-# Custom bar
-#exec ~/.config/i3lemonbar/i3_lemonbar.sh
-#exec --no-startup-id yabar
-#exec_always --no-startup-id ~/.config/polybar/launch.sh
-
 # i3-gaps
-for_window [class=".*"] border pixel 1
+default_border pixel 1
 gaps inner 20
 smart_borders on
-#exec feh --bg-scale --no-fehbg ~/.bg/bg.png
-#border_radius 15
+#border_radius 10
+hide_edge_borders vertical
 
 # Disable focus following mouse
 focus_follows_mouse no
 
-#exec_always xbindkeys --poll-rc
-#exec_always killall -q picom; picom &
-
-# Window colors
-
-# Purple & Gold
-#client.focused_inactive #0d1010 #212121 #d9d9d9 #0d1010 #836b31
-#client.unfocused        #0d1010 #212121 #d9d9d9 #424242 #57472b
-#client.focused          #702751 #cecece #000000 #d9d9d9 #ad8a34
-
-# Dracula
-client.focused          #BD93F9 #44475A #FFFFFF #F8F8F2   #44475A
-client.focused_inactive #282A36 #44475A #FFFFFF #F8F8F2   #44475A
-client.unfocused        #282A36 #44475A #888888 #F8F8F2   #44475A
-client.urgent           #2F343A #6272A4 #FFFFFF #900000   #900000
-client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+# Dracula 
+set $dark #282a36
+set $light #ff79c6
+set $porple #bd93f9
+client.unfocused        $dark   #000000 #000000 $dark   $dark
+client.focused          $light  #000000 #000000 $light  $light
+client.focused_inactive $porple #000000 #000000 $porple   $porple
 
 # Startup
 exec i3-sensible-terminal

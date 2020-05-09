@@ -5,14 +5,14 @@ function fish_greeting
     fortune
 end
 
-set -g fish_color_cwd $fish_color_redirection
-set -g __fish_git_prompt_color_branch $fish_color_autosuggestion
-set -g __fish_git_prompt $fish_color_autosuggestion
-set -g __fish_git_prompt_describe_style describe
-set -g __fish_git_prompt_showupstream auto
-set -g __fish_git_prompt_showdirtystate 1
+set fish_color_cwd $fish_color_redirection
+set __fish_git_prompt_color_branch $fish_color_autosuggestion
+set __fish_git_prompt $fish_color_autosuggestion
+set __fish_git_prompt_describe_style describe
+set __fish_git_prompt_showupstream auto
+set __fish_git_prompt_showdirtystate 1
 
-set -gx PATH $PATH $HOME/dotnet/tools $HOME/.myscripts
+#set PATH $PATH $HOME/dotnet/tools $HOME/.myscripts
 
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/.git/ --work-tree=$HOME"
 
